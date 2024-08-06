@@ -99,3 +99,25 @@ export const userLoginController = async (req, res) => {
 
 
 
+export const userLogoutController = async (req, res) => {
+  try {
+   const user = await UserModel.findById(req.userId);
+   if (!user) {
+     return res.status(404).send({
+       success: false,
+       message: "User not found",
+     });
+   }
+    res.status(200).send({
+      success: true,
+      message:
+        "User logged out successfully. Please clear your token on the client side.",
+    });
+  } catch (error) {
+    console.log(`Error in API: ${error}`);
+    res.status(500).send({
+      status: "error",
+      message: "Internal Server Error || Error in Logout API",
+    });
+  }
+};
