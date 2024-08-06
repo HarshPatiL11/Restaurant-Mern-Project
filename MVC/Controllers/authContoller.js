@@ -8,7 +8,7 @@ console.log("JWT_SECRET:", JWT_SECRET);
 // add user
 export const registerUser = async (req, res) => {
   try {
-    const { userName, userEmail, userPassword, userAddress, userPhone } =
+    const { userName, userEmail, userPassword, userAddress, userPhone ,answer } =
 req.body;
 
     // validate input
@@ -27,6 +27,9 @@ req.body;
     if (!userPhone) {
       return res.status(400).send("Enter your Password");
     }
+    if (!answer) {
+      return res.status(400).send("enter a answer for password reset QnA");
+    }
 
     // check is user exist
     const chkExisting = await UserModel.findOne({ userEmail });
@@ -42,6 +45,7 @@ req.body;
       userPassword: hashedPassword,
       userAddress,
       userPhone,
+      answer, 
     });
     // const token = jwt.sign({ id: newUser._id }, JWT_SECRET, { expiresIn: "1hr" });
     // Send response

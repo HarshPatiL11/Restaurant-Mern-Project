@@ -1,3 +1,4 @@
+import { hashPassword } from "../Helper/authHelper.js";
 import UserModel from "../Models/UserModel.js";
 
 // get
@@ -56,6 +57,37 @@ export const userUpdateController = async (req, res) => {
       message: "Internal Server Error || error in Update API",
     });
   }
+};
+
+// reset password
+export const resetPasswordControll = async(req,res) =>{
+  try {
+    const {userEmail ,newPassword , answer} = req.body;
+    if(!userEmail || !newPassword || !answer) {  
+      return res.status(500).send({success:false, message:"Enter all details"})
+    };
+    const user = await UserModel.findOne({userEmail,answer});
+    if (!user){
+      return res.status(404).send({
+        success: false,
+        message: "User not found",
+      });
+    }
+     const hashedPassword = await hashPassword(newPassword);
+     user.userPassword = hashedPassword;
+     await user.save();
+     res.status(200).send({
+       success: true,
+       message: "User Data Updated Successfully",
+     });
+  } catch (error) {
+     console.log(`Error in API: ${error}`);
+     res.status(500).send({
+       status: "error",
+       message: "Internal Server Error || error in reset Password API",
+     });
+  }
+
 };
 
 

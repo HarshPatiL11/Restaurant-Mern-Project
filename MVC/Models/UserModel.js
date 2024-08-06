@@ -17,10 +17,15 @@ const userSchema = new mongoose.Schema(
     },
     userAddress: {
       type: Array,
+      require: [true, "address is required"],
     },
     userPhone: {
       type: String,
       require: [true, "Phone is required"],
+    },
+    answer: {
+      type: String,
+      require: [true, "answer is required"],
     },
     userType: {
       type: String,
