@@ -1,27 +1,33 @@
-const express=require('express')
-const morgon=require('morgan')
-const cors=require('cors')
-const dotenv=require('dotenv')
-const connectDB = require('./MVC/DB/DB')
-// const userRouter = require('./MVC/Routes/u   serRoute.js')
-const app=express()
-// config dotenv
-dotenv.config()
-// call db
-connectDB()
+import { PORT } from "./config/config.js";
+
+import express from "express";
+import morgan from "morgan";
+import cors from "cors";
+import colors from "colors";
+import bodyParser from "body-parser";
+import connectDb from "./MVC/DB/DB.js"; // Default import
+import authrouter from "./MVC/Routes/authRoute.js";
+import userRouter from "./MVC/Routes/userRouter.js";
+
+const app = express();
+
 // middleware
-app.use(morgon('dev'))
-app.use(express.json())
-app.use(cors()) ;
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev"));
 
-app.get('/',(req,res)=>{
-    res.send("<h1>hello server </h1>")
-})
-// route
-// app.use("/api/v1/user", userRouter);
-// app.use("/api/v1/transection",)
+app.get("/", (req, res) => {
+  res.send(`<h1> hello port ${PORT}</h1>`);
+});
 
-const PORT=process.env.PORT
-app.listen(PORT,()=>{
-    console.log(("listenin to port "+PORT).bgYellow.white)
-})
+// api routing
+app.use("/api/v1/auth", authrouter);
+app.use("/api/v1/user", userRouter);
+
+// listen
+app.listen(PORT, () => {
+  console.log(`Listening to port number ${PORT}`.bgGreen.white);
+});
+
+// call database
+connectDb();
