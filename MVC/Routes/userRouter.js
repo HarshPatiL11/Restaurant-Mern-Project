@@ -4,6 +4,8 @@ import {
   getUserByID,
   userUpdateController,
   resetPasswordControll,
+  updatePasswordControll,
+  userDelete,
 } from "../Controllers/userController.js";
 import { authMiddle } from "../Middleware/authMiddleware.js";
 
@@ -20,10 +22,13 @@ userRouter.get("/allUser", authMiddle, getAllUser);
 // update
 userRouter.put('/updateUser',authMiddle,userUpdateController)
 
+// PASSWORDS
 // reset password
 userRouter.put("/resetPassword", authMiddle, resetPasswordControll);
+// update
+userRouter.put("/updatePassword", authMiddle, updatePasswordControll);
 
-
-
+{/*DElETE USER */}
+userRouter.delete("/removeUser", authMiddle, userDelete);
 // export
 export default userRouter;
