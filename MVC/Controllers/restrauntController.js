@@ -57,26 +57,24 @@ export const createRestaurant = async (req, res) => {
       });
     }
 
-    let imagesData = [];
-    if (req.files?.restImage) {
-      // If restImage is not an array, convert it to an array
-      const restImages = Array.isArray(req.files.restImage)
-        ? req.files.restImage
-        : [req.files.restImage];
-
-      for (const image of restImages) {
-        if (image.size > 1000000) {
-          return res
-            .status(400)
-            .send({ error: "Each image should be less than 1 MB" });
-        }
-        const imageData = {
-          data: fs.readFileSync(image.path),
-          contentType: image.type,
-        };
-        imagesData.push(imageData);
+    // Parse restImage
+    let restImage = [];
+    i = 0;
+    while (req.files[`restImage[${i}]`]) {
+      const image = req.files[`restImage[${i}]`];
+      if (image.size > 1000000) {
+        return res.status(400).send({
+          error: "Each image should be less than 1 MB",
+        });
       }
+      const imageData = {
+        data: fs.readFileSync(image.path),
+        contentType: image.type,
+      };
+      restImage.push(imageData);
+      i++;
     }
+    console.log(restImage);
 
     let logoData = "";
     if (req.files?.restLogo) {
@@ -97,7 +95,7 @@ export const createRestaurant = async (req, res) => {
 
     const newRest = new restrauntModel({
       restTitle,
-      restImage: imagesData,
+      restImage,
       restMenu,
       restTime,
       restPickUp: parsedRestPickUp,
