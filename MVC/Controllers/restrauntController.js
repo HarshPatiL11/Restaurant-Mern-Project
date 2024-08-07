@@ -24,38 +24,67 @@ export const createRestaurant = async (req, res) => {
       title,
     } = restCoords;
 
+    // Validate restaurant title
     if (!restTitle || restTitle.length < 3) {
       return res.status(404).send({
         success: false,
         message: "Title is necessary. Title must be longer than 3 letters",
       });
     }
-    console.log(restTitle);
+
+    // Validate operating time
+    if (!restTime || restTime.length < 5) {
+      // Example: 09:00 AM
+      return res.status(404).send({
+        success: false,
+        message: "Enter valid Restaurant Operating Time (e.g., '09:00 AM').",
+      });
+    }
+
+    // Validate restaurant code
+    if (!restCode || restCode.length < 3) {
+      return res.status(404).send({
+        success: false,
+        message: "Enter valid Restaurant Code (at least 3 characters).",
+      });
+    }
 
     // Parse restMenu
     const restMenu = [];
     let i = 0;
     while (req.fields[`restMenu[${i}][item]`]) {
+      const item = req.fields[`restMenu[${i}][item]`];
+      const price = req.fields[`restMenu[${i}][price]`];
+
+      // Validate menu item
+      if (!item || item.length < 3) {
+        return res.status(404).send({
+          success: false,
+          message: `Menu item at index ${i} is required and must be longer than 3 letters.`,
+        });
+      }
+
+      // Validate menu item price
+      if (!price || isNaN(price) || price <= 0) {
+        return res.status(404).send({
+          success: false,
+          message: `Price for menu item '${item}' must be a valid positive number.`,
+        });
+      }
+
       restMenu.push({
-        item: req.fields[`restMenu[${i}][item]`],
-        price: req.fields[`restMenu[${i}][price]`],
+        item,
+        price: parseFloat(price), // Ensure price is a number
       });
       i++;
     }
-    console.log(restMenu);
-    if (!restTime) {
-      return res.status(404).send({
-        success: false,
-        message: "Enter Restaurant Operating Time.",
-      });
-    }
 
-    if (!restCode) {
-      return res.status(404).send({
-        success: false,
-        message: "Enter Restaurant Code",
-      });
-    }
+    // Validate pickup, delivery, and open status
+    const parsedRestPickUp = restPickUp ? restPickUp.trim() === "true" : false;
+    const parsedRestDilivary = restDilivary
+      ? restDilivary.trim() === "true"
+      : false;
+    const parsedIsOpen = isOPen ? isOPen.trim() === "true" : false;
 
     // Parse restImage
     let restImage = [];
@@ -67,41 +96,38 @@ export const createRestaurant = async (req, res) => {
           error: "Each image should be less than 1 MB",
         });
       }
+
       const imageData = {
         data: fs.readFileSync(image.path),
         contentType: image.type,
       };
+
       restImage.push(imageData);
       i++;
     }
-    console.log(restImage);
 
-    let logoData = "";
+    let logoData = null;
+
     if (req.files?.restLogo) {
       const restLogo = req.files.restLogo;
       if (restLogo.size > 1000000) {
         return res.status(400).send({ error: "Logo should be less than 1 MB" });
       }
-      logoData = `data:${restLogo.type};base64,${fs
-        .readFileSync(restLogo.path)
-        .toString("base64")}`;
+
+      logoData = {
+        data: fs.readFileSync(restLogo.path), 
+        contentType: restLogo.type,
+      };
     }
 
-    const parsedRestPickUp = restPickUp ? restPickUp.trim() === "true" : false;
-    const parsedRestDilivary = restDilivary
-      ? restDilivary.trim() === "true"
-      : false;
-    const parsedIsOpen = isOPen ? isOPen.trim() === "true" : false;
-
+    // Create new restaurant instance with all data
     const newRest = new restrauntModel({
       restTitle,
-      restImage,
       restMenu,
       restTime,
       restPickUp: parsedRestPickUp,
       restDilivary: parsedRestDilivary,
       isOPen: parsedIsOpen,
-      restLogo: logoData,
       restRating,
       ratingCount,
       restCode,
@@ -114,12 +140,16 @@ export const createRestaurant = async (req, res) => {
         address,
         title,
       },
+      restImage, // Include the images array
+      restLogo: logoData, // Include the logo data
     });
 
     await newRest.save();
+
     res.status(200).send({
       success: true,
       message: "Restaurant Added Successfully",
+      newRest,
     });
   } catch (error) {
     console.error(error);
@@ -129,7 +159,8 @@ export const createRestaurant = async (req, res) => {
   }
 };
 
-export const getAllRestraunt = async (req, res) => {
+
+export const getAllRestaurant = async (req, res) => {
   try {
     const restaurants = await restrauntModel.find();
 

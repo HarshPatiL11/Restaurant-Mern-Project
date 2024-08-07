@@ -39,7 +39,14 @@ const restSchema = new mongoose.Schema(
       default: true,
     },
     restLogo: {
-      type: String, // Storing logo as base64 string
+      data: {
+        type: Buffer, 
+        required: false,
+      },
+      contentType: {
+        type: String,
+        required: false,
+      },
     },
     restRating: {
       type: Number,
