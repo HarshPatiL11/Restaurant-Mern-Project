@@ -13,7 +13,7 @@ export const createRestraunt = async (req, res) => {
       restRating,
       ratingCount,
       restCode,
-      restCoords,
+      restCoords = {}, // Add default value to avoid destructuring undefined
     } = req.body;
     const {
       id,
@@ -24,6 +24,7 @@ export const createRestraunt = async (req, res) => {
       address,
       title,
     } = restCoords;
+
     // Check if req.files exists
     const { restImage, restLogo } = req.files;
 
