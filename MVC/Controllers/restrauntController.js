@@ -162,7 +162,7 @@ export const createRestaurant = async (req, res) => {
 
 export const getAllRestaurant = async (req, res) => {
   try {
-    const restaurants = await restrauntModel.find();
+    const restaurants = await restrauntModel.find({});
 
     // Convert image data to base64
     const restWithImg = restaurants.map((restaurant) => {
@@ -179,9 +179,55 @@ export const getAllRestaurant = async (req, res) => {
       };
     });
 
-    res.status(200).json(restWithImg);
+    res.status(200).json({
+      success: true,
+      totalCount: restWithImg.length,
+      restWithImg,
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ error: "Internal server error" });
+    res.status(500).send({
+        success: false,
+        message: "Internal server error || error in get restraunt All api",error
+      });
+  }
+};
+export const getRestaurantById = async (req, res) => {
+  try {
+    const restId = req.params.id; // Change this line to extract ID correctly
+    const restaurant = await restrauntModel.findById(restId); // Fetch restaurant by ID
+
+    if (!restaurant) {
+      return res.status(404).send({
+        success: false,
+        message: "Restaurant not found",
+      });
+    }
+
+    // Convert image data to base64 for the single restaurant
+    const images = restaurant.restImage.map((img) => ({
+      data: img.data
+        ? `data:${img.contentType};base64,${img.data.toString("base64")}`
+        : null,
+      contentType: img.contentType,
+    }));
+
+    const restWithImg = {
+      ...restaurant._doc,
+      restImage: images,
+    };
+
+    res.status(200).json({
+      success: true,
+      totalCount: 1, // Returning 1 for a single restaurant
+      restWithImg,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: "Internal server error || error in get restaurant by id API",
+      error,
+    });
   }
 };
