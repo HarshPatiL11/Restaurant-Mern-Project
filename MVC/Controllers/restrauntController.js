@@ -192,9 +192,18 @@ export const getAllRestaurant = async (req, res) => {
       });
   }
 };
+
+
+// get restaurant by Id
 export const getRestaurantById = async (req, res) => {
   try {
     const restId = req.params.id; // Change this line to extract ID correctly
+      if (!restId) {
+        return res.status(404).send({
+          success: false,
+          message: "Please Provide Restraunt Id",
+        });
+      }
     const restaurant = await restrauntModel.findById(restId); // Fetch restaurant by ID
 
     if (!restaurant) {
@@ -227,6 +236,40 @@ export const getRestaurantById = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Internal server error || error in get restaurant by id API",
+      error,
+    });
+  }
+};
+
+// delete restraunt
+
+export const deleteRestaurant = async (req, res) => {
+  try {
+    const restId = req.params.id; // Change this line to extract ID correctly
+    if (!restId) {
+      return res.status(404).send({
+        success: false,
+        message: "Please Provide Restraunt Id",
+      });
+    }
+    const restaurant = await restrauntModel.findById(restId); // Fetch restaurant by ID
+
+    if (!restaurant) {
+      return res.status(404).send({
+        success: false,
+        message: "Restaurant not found",
+      });
+    }
+    await restaurant.deleteOne();
+    res.status(200).send({
+      success: true,
+      message:"Restaurant data Deleted Successfully"
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: "Internal server error || error In Delete Restraunt API",
       error,
     });
   }
