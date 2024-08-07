@@ -8,6 +8,7 @@ import bodyParser from "body-parser";
 import connectDb from "./MVC/DB/DB.js"; // Default import
 import authrouter from "./MVC/Routes/authRoute.js";
 import userRouter from "./MVC/Routes/userRouter.js";
+import restRouter from "./MVC/Routes/restrauntRouter.js";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 // api routing
 app.use("/api/v1/auth", authrouter);
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/restraunts", restRouter);
 
 // listen
 app.listen(PORT, () => {

@@ -6,7 +6,7 @@ const restSchema = new mongoose.Schema(
       type: String,
       required: [true, "REsraunt Title is required"],
     },
-    restImage: [
+    restImage: 
       {
         data: {
           type: Buffer,
@@ -17,7 +17,7 @@ const restSchema = new mongoose.Schema(
           required: false,
         },
       },
-    ],
+    
     restMenu: {
       type: Array,
       required: [true, "Enter restraunt menu"],
@@ -75,3 +75,4 @@ const restSchema = new mongoose.Schema(
 
 // export
 export default mongoose.model("Restaurant", restSchema);
+// const {restTitle,restImage,restMenu,restTime,restPickUp,restDilivary,isOPen,restLogo,restRating,ratingCount,restCode,restCoords} = req.body
