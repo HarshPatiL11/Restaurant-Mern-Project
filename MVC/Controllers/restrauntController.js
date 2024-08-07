@@ -128,3 +128,29 @@ export const createRestaurant = async (req, res) => {
       .send({ success: false, message: "Internal server error", error });
   }
 };
+
+export const getAllRestraunt = async (req, res) => {
+  try {
+    const restaurants = await restrauntModel.find();
+
+    // Convert image data to base64
+    const restWithImg = restaurants.map((restaurant) => {
+      const images = restaurant.restImage.map((img) => ({
+        data: img.data
+          ? `data:${img.contentType};base64,${img.data.toString("base64")}`
+          : null,
+        contentType: img.contentType,
+      }));
+
+      return {
+        ...restaurant._doc,
+        restImage: images,
+      };
+    });
+
+    res.status(200).json(restWithImg);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Internal server error" });
+  }
+};
