@@ -1,11 +1,10 @@
 import fs from "fs";
 import restrauntModel from "../Models/restrauntModel.js";
 
-export const createRestraunt = async (req, res) => {
+export const createRestaurant = async (req, res) => {
   try {
     const {
       restTitle,
-      restMenu,
       restTime,
       restPickUp,
       restDilivary,
@@ -14,7 +13,7 @@ export const createRestraunt = async (req, res) => {
       ratingCount,
       restCode,
       restCoords = {}, // Add default value to avoid destructuring undefined
-    } = req.body;
+    } = req.fields;
     const {
       id,
       latitude,
@@ -25,43 +24,32 @@ export const createRestraunt = async (req, res) => {
       title,
     } = restCoords;
 
-    // Check if req.files exists
-    const { restImage, restLogo } = req.files;
-
-    // const restImage = req.files?.restImage; // Use optional chaining to avoid errors
-    // const restLogo = req.files?.restLogo; // Use optional chaining to avoid errors
-
     if (!restTitle || restTitle.length < 3) {
       return res.status(404).send({
         success: false,
         message: "Title is necessary. Title must be longer than 3 letters",
       });
     }
-    if (!restMenu) {
-      return res.status(404).send({
-        success: false,
-        message: "Enter Restaurant Menu.",
+    console.log(restTitle);
+
+    // Parse restMenu
+    const restMenu = [];
+    let i = 0;
+    while (req.fields[`restMenu[${i}][item]`]) {
+      restMenu.push({
+        item: req.fields[`restMenu[${i}][item]`],
+        price: req.fields[`restMenu[${i}][price]`],
       });
+      i++;
     }
-    if (restPickUp === undefined) {
-      return res.status(404).send({
-        success: false,
-        message: "Mention if PickUp Available, Set to True By Default",
-      });
-    }
+    console.log(restMenu);
     if (!restTime) {
       return res.status(404).send({
         success: false,
         message: "Enter Restaurant Operating Time.",
       });
     }
-    if (restDilivary === undefined) {
-      return res.status(404).send({
-        success: false,
-        message:
-          "Mention if home delivery services Available, Set to True By Default",
-      });
-    }
+
     if (!restCode) {
       return res.status(404).send({
         success: false,
@@ -69,13 +57,53 @@ export const createRestraunt = async (req, res) => {
       });
     }
 
+    let imagesData = [];
+    if (req.files?.restImage) {
+      // If restImage is not an array, convert it to an array
+      const restImages = Array.isArray(req.files.restImage)
+        ? req.files.restImage
+        : [req.files.restImage];
+
+      for (const image of restImages) {
+        if (image.size > 1000000) {
+          return res
+            .status(400)
+            .send({ error: "Each image should be less than 1 MB" });
+        }
+        const imageData = {
+          data: fs.readFileSync(image.path),
+          contentType: image.type,
+        };
+        imagesData.push(imageData);
+      }
+    }
+
+    let logoData = "";
+    if (req.files?.restLogo) {
+      const restLogo = req.files.restLogo;
+      if (restLogo.size > 1000000) {
+        return res.status(400).send({ error: "Logo should be less than 1 MB" });
+      }
+      logoData = `data:${restLogo.type};base64,${fs
+        .readFileSync(restLogo.path)
+        .toString("base64")}`;
+    }
+
+    const parsedRestPickUp = restPickUp ? restPickUp.trim() === "true" : false;
+    const parsedRestDilivary = restDilivary
+      ? restDilivary.trim() === "true"
+      : false;
+    const parsedIsOpen = isOPen ? isOPen.trim() === "true" : false;
+
     const newRest = new restrauntModel({
       restTitle,
+      restImage: imagesData,
       restMenu,
       restTime,
-      restPickUp,
-      restDilivary,
-      isOPen,
+      restPickUp: parsedRestPickUp,
+      restDilivary: parsedRestDilivary,
+      isOPen: parsedIsOpen,
+      restLogo: logoData,
       restRating,
       ratingCount,
       restCode,
@@ -88,42 +116,6 @@ export const createRestraunt = async (req, res) => {
         address,
         title,
       },
-    });
-
-    // Handle restImage if it exists
-    if (restImage) {
-      if (restImage.size > 1000000) {
-        return res
-          .status(400)
-          .send({ error: "Image should be less than 1 MB" });
-      }
-    }
-
-    let imageData = "";
-    if (restImage) {
-      imageData = `data:${restImage.type};base64,${fs
-        .readFileSync(restImage.path)
-        .toString("base64")}`;
-    }
-
-    // Handle restLogo if it exists
-
-    if (restLogo) {
-      if (restLogo.size > 1000000) {
-        return res.status(400).send({ error: "Logo should be less than 1 MB" });
-      }
-      let logoData = "";
-      if (restLogo) {
-        logoData = `data:${restLogo.type};base64,${fs
-          .readFileSync(restLogo.path)
-          .toString("base64")}`;
-      }
-    }
-
-    await newRest.save();
-    res.status(200).send({
-      success: true,
-      message: "Restaurant Added Successfully",
     });
 
     await newRest.save();

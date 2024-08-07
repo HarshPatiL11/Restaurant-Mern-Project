@@ -4,23 +4,27 @@ const restSchema = new mongoose.Schema(
   {
     restTitle: {
       type: String,
-      required: [true, "Restaurant Title is required"], // Corrected spelling
+      required: [true, "Restaurant Title is required"],
     },
-    restImage: {
-      data: {
-        type: Buffer,
+    restImage: [
+      {
+        data: {
+          type: Buffer,
+          required: false,
+        },
+        contentType: {
+          type: String,
+          required: false,
+        },
       },
-      contentType: {
-        type: String,
-      },
-    },
+    ],
     restMenu: {
       type: Array,
-      required: [true, "Enter restaurant menu"], // Corrected spelling
+      required: [true, "Enter restaurant menu"],
     },
     restTime: {
       type: String,
-      required: [true, "Restaurant Operating Timing is required"], // Corrected spelling
+      required: [true, "Restaurant Operating Timing is required"],
     },
     restPickUp: {
       type: Boolean,
@@ -35,12 +39,7 @@ const restSchema = new mongoose.Schema(
       default: true,
     },
     restLogo: {
-      data: {
-        type: Buffer,
-      },
-      contentType: {
-        type: String,
-      },
+      type: String, // Storing logo as base64 string
     },
     restRating: {
       type: Number,
@@ -49,7 +48,7 @@ const restSchema = new mongoose.Schema(
       max: 5,
     },
     ratingCount: {
-      type: Number, // Changed to Number for consistency
+      type: Number,
     },
     restCode: {
       type: String,
@@ -67,5 +66,4 @@ const restSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// export
 export default mongoose.model("Restaurant", restSchema);
