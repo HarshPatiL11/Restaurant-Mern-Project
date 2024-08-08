@@ -6,9 +6,12 @@ import cors from "cors";
 import colors from "colors";
 import bodyParser from "body-parser";
 import connectDb from "./MVC/DB/DB.js"; // Default import
-import authrouter from "./MVC/Routes/authRoute.js";
-import userRouter from "./MVC/Routes/userRouter.js";
-import restRouter from "./MVC/Routes/restrauntRouter.js";
+// router imports 
+import authrouter from "./MVC/Routes/AuthRoute.js";
+import userRouter from "./MVC/Routes/UserRouter.js";
+import restRouter from "./MVC/Routes/RestaurauntRouter.js";
+import catrouter from "./MVC/Routes/CatRouter.js";
+import foodRouter from "./MVC/Routes/FoodRouter.js";
 
 const app = express();
 
@@ -25,6 +28,8 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authrouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/restraunts", restRouter);
+app.use("/api/v1/category", catrouter);
+app.use("/api/v1/food/", foodRouter);
 
 // listen
 app.listen(PORT, () => {

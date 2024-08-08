@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import UserModel from "../Models/UserModel.js";
-import { comparePassword, hashPassword } from "../Helper/authHelper.js";
+import { comparePassword, hashPassword } from "../Helper/AuthHelper.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 console.log("JWT_SECRET:", JWT_SECRET);

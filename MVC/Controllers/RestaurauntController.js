@@ -1,5 +1,5 @@
 import fs from "fs";
-import restrauntModel from "../Models/restrauntModel.js";
+import restrauntModel from "../Models/RestrauntModel.js";
 
 export const createRestaurant = async (req, res) => {
   try {

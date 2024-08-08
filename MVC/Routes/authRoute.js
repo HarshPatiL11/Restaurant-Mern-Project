@@ -1,5 +1,5 @@
 import express from 'express'
-import { registerUser, userLoginController } from '../Controllers/authContoller.js';
+import { registerUser, userLoginController } from '../Controllers/AuthContoller.js';
 
 const authrouter = express.Router();
 
@@ -7,7 +7,7 @@ const authrouter = express.Router();
 // routers
 authrouter.post("/register", registerUser);
 
-//fetch all user
+//get all user
 // router.get('/allUser',getAllUser);
 
 // login

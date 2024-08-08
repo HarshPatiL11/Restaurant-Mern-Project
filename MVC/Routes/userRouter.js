@@ -6,8 +6,8 @@ import {
   resetPasswordControll,
   updatePasswordControll,
   userDelete,
-} from "../Controllers/userController.js";
-import { authMiddle } from "../Middleware/authMiddleware.js";
+} from "../Controllers/UserController.js";
+import { authMiddle } from "../Middleware/AuthMiddleware.js";
 
 const userRouter = express.Router();
 
@@ -30,5 +30,5 @@ userRouter.put("/updatePassword", authMiddle, updatePasswordControll);
 
 {/*DElETE USER */}
 userRouter.delete("/removeUser", authMiddle, userDelete);
-// export
+
 export default userRouter;
