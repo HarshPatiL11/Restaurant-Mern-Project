@@ -13,8 +13,8 @@ export const authMiddle = async (req, res, next) => {
           message: "Unauthorized User",
         });
       } else {
-        console.log("Decoded JWT:", decode); 
-           req.userId = decode.id; 
+        console.log("Decoded JWT:", decode);
+        req.userId = decode.id;
         next();
       }
     });

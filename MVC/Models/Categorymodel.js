@@ -6,8 +6,7 @@ const categorySchema = new mongoose.Schema(
       type: String,
       required: [true, "category Name is required"],
     },
-    catImage: [
-      {
+    catImage: {
         data: {
           type: Buffer,
           required: false,
@@ -17,7 +16,7 @@ const categorySchema = new mongoose.Schema(
           required: false,
         },
       },
-    ],
+    
   },
   { timestamps: true }
 );

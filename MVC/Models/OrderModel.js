@@ -1,23 +1,23 @@
-import mongoose from "mongoose";
+  import mongoose from "mongoose";
 
-// Schema
-const ordersSchema = new mongoose.Schema(
-  {
-    foods: [{ type: mongoose.Schema.Types.ObjectId, ref: "Foods" }],
-    payment: {},
-    buyer: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+  // Schema
+  const ordersSchema = new mongoose.Schema(
+    {
+      foods: [{ type: mongoose.Schema.Types.ObjectId, ref: "Foods" }],
+      payment: {},
+      buyer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      status: {
+        type: String,
+        enum: ["preparing", "prepare", "on the way", "delivered"],
+        default: "preparing",
+      },
     },
-    status: {
-      type: String,
-      enum: ["preparing", "prepare", "on the way", "delivered"],
-      default: "preparing",
-    },
-  },
-  { timestamps: true }
-);
+    { timestamps: true }
+  );
 
-// Export
-const Orders = mongoose.model("Orders", ordersSchema);
-export default Orders;
+  // Export
+  const Orders = mongoose.model("Orders", ordersSchema);
+  export default Orders;
