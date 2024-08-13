@@ -1,0 +1,65 @@
+.HomeContainer {
+  margin: 0px;
+  padding: 0px;
+  background: url('../Images/HomeBg.jpg') no-repeat center center;
+  background-size: cover;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.HomeDiv {
+  width: auto;
+  display: flex;
+  margin-left: 60px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: flex-start;
+  position: absolute;
+  justify-content: center;
+  text-align: left;
+  background-size: cover;
+  padding: 20px;
+}
+
+.HomeDiv h2 {
+  color: #e4bd69 !important;
+  font-weight: bolder;
+  font-style: italic;
+}
+
+/* .HomeDiv h6 {
+  font-size: 1.8rem;
+  margin: 16px 0;
+} */
+
+.HomeDiv button {
+  background-color: #FFB000;
+  color: #F5F5DC;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border 0.3s ease, color 0.3s ease;
+}
+
+.HomeDiv button:hover {
+  background-color: transparent;
+  border: 3px solid #FFB000;
+  color: #FFB000;
+}
+
+@media (max-width: 600px) {
+  .HomeContainer {
+    justify-content: center !important;
+  align-items: center;
+    height: 70vh;
+  }
+  .HomeDiv {
+    margin-left: 0;
+    left: 0;
+    text-align: center;
+    align-items: center;
+  }
+}

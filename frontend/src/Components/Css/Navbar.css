@@ -1,0 +1,33 @@
+.Resto-icon{
+    margin-right: 5px;
+}
+
+.nav-menu{
+    display: flex;
+
+    list-style: none;
+    align-items: center;
+    justify-items: center;
+}
+.nav-menu li{
+    margin: 0px 20px;
+}
+.nav-menu li a{
+text-decoration: none;
+color: #F5F5DC;
+}
+.nav-menu-mobile {
+  list-style: none;
+  padding: 0; /* Ensure no padding */
+  margin: 0; /* Ensure no margin */
+}
+
+.nav-menu-mobile li {
+  margin: 10px 0; /* Space between items */
+}
+
+.nav-menu-mobile a {
+    font-size: 24px;
+  color: #F5F5DC; /* Link color */
+  text-decoration: none; /* Remove underline */
+}

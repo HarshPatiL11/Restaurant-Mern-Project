@@ -1,0 +1,76 @@
+.CatCardSection {
+  width: 85vw;
+  margin: auto;
+  padding: 20px 0;
+}
+
+.CatHeader {
+  margin: 20px 30px;
+  text-align: center;
+  color: #FFB000;
+}
+
+.CatHeader h4 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.CatHeader h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+}
+
+.CatCardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.CardBody {
+     width: 220px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.CardBody:hover {
+  transform: scale(1.05);
+}
+
+.catImg img {
+  width: 220px;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.catOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.CardBody:hover .catOverlay {
+  opacity: 1;
+}
+
+.catTitle {
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
