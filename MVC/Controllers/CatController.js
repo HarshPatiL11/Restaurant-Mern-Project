@@ -45,6 +45,43 @@ export const addCategory = async (req, res) => {
 };
 
 // getAll
+// export const getAllCategories = async (req, res) => {
+//   try {
+//     const categories = await categorymodel.find({});
+//     if (!categories) {
+//       return res.status(404).send({
+//         success: false,
+//         message: "No categories",
+//       });
+//     }
+//     // Convert image data to base64
+//     const categoriesWithImage = categories.map((category) => {
+//       const images = category.catImage.map((img) => ({
+//         data: img.data
+//           ? `data:${img.contentType};base64,${img.data.toString("base64")}`
+//           : null,
+//         contentType: img.contentType,
+//       }));
+
+//       return {
+//         ...category._doc,
+//         catImage: images, // Corrected field name
+//       };
+//     });
+
+//     res.status(200).json({
+//       success: true,
+//       totalCount: categoriesWithImage.length,
+//       categories: categoriesWithImage,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: "Api Error, error in get All category API",
+//       error: error.message,
+//     });
+//   }
+// };
 export const getAllCategories = async (req, res) => {
   try {
     const categories = await categorymodel.find({});
@@ -54,18 +91,16 @@ export const getAllCategories = async (req, res) => {
         message: "No categories",
       });
     }
+
     // Convert image data to base64
     const categoriesWithImage = categories.map((category) => {
-      const images = category.catImage.map((img) => ({
-        data: img.data
-          ? `data:${img.contentType};base64,${img.data.toString("base64")}`
-          : null,
-        contentType: img.contentType,
-      }));
+      const catImage = category.catImage.data
+        ? `data:${category.catImage.contentType};base64,${category.catImage.data.toString("base64")}`
+        : null;
 
       return {
         ...category._doc,
-        catImage: images, // Corrected field name
+        catImage, // Single image string
       };
     });
 
@@ -82,7 +117,6 @@ export const getAllCategories = async (req, res) => {
     });
   }
 };
-
 // update
 
 export const updateCategory = async (req, res) => {
