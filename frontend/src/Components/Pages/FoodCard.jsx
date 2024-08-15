@@ -46,7 +46,7 @@ const FoodCard = () => {
                 <p className="FoodName">{food.foodTitle}</p>
                 <div className="extraInfo">
                   <p>{food.foodDescription}</p>
-                  <p>{food.}</p>
+                  <p>{food.Restaurant}</p>
 
                   {/* <span onClick={() => handleView(food)} className="viewMore">
                     View More
