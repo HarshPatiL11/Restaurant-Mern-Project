@@ -1,0 +1,108 @@
+.FoodCardSection {
+  padding: 20px;
+  background-color: #F5F5DC; /* Light background */
+}
+
+.FoodCardHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.FoodCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.FoodCardHeader {
+  margin: 20px 30px;
+  text-align: center;
+  color: #FFB000;
+}
+
+.FoodCardHeader h4 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.FoodCardHeader h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+}
+
+.FoodCardBody {
+  position: relative;
+  width: 250px; /* Adjust width as needed */
+  height: 250px; /* Adjust height as needed */
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #FFCF9D; /* Card background */
+}
+
+.FoodCardBody:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.FoodImg {
+  display: flex;
+  overflow: hidden;
+  height: 200px; /* Adjust height as needed */
+}
+
+.FoodImg img {
+  width: auto;
+  height: 100%;
+  margin-right: 5px; /* Add space between images */
+  transition: transform 0.3s;
+}
+
+.FoodCardBody:hover .FoodImg img {
+  transform: scale(1.05); /* Scale effect on hover */
+}
+
+.FoodTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5); /* Dark background for contrast */
+  color: white; /* White text color for visibility */
+  transition: background 0.3s;
+}
+
+.FoodCardBody:hover .FoodTitle {
+  background: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+}
+
+.FoodName {
+  font-weight: bold;
+}
+
+.extraInfo {
+  display: none;
+  text-align: center;
+}
+
+.FoodCardBody:hover .extraInfo {
+  display: block;
+}
+
+.viewMore {
+  display: inline-block;
+  margin-top: 5px;
+  text-decoration: none;
+  color: #FFB000;
+  font-weight: bold;
+}
+
+.viewMore:hover {
+  color: rgb(248, 219, 188);
+}

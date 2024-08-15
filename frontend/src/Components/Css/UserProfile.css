@@ -1,0 +1,92 @@
+.RestIdSection {
+  padding: 20px;
+  background: linear-gradient(135deg, #004225, #FFCF9D);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.restaurantDetailContainer {
+  max-width: 800px; /* Reduced max-width for a more compact design */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px; /* Slightly larger border radius for modern appeal */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  color: #fff; /* Ensure text is readable against the background */
+  text-align: center; /* Center align text for a cleaner look */
+}
+
+.restaurantDetailContainer .profile-image {
+  width: 120px; /* Increased image size for better visibility */
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 3px solid #FFB000; /* Added border for better emphasis */
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 20px;
+  text-align: center; /* Center align error message */
+}
+
+h2 {
+  color: #fff; /* Use your primary color for headings */
+  margin-bottom: 20px; /* Add margin for better spacing */
+}
+
+.userDetailsTable {
+  width: 100%; /* Full width for the table */
+  border-collapse: collapse; /* Remove space between cells */
+  margin-bottom: 20px; /* Spacing below the table */
+}
+
+.userDetailsTable th {
+  background-color: transparent; /* Remove background color from header */
+  color: #004225; /* Dark text color for contrast */
+  padding: 10px; /* Spacing for header cells */
+  text-align: left; /* Left align header text */
+}
+
+.userDetailsTable td {
+  padding: 10px; /* Spacing for data cells */
+  border-bottom: 1px solid #ccc; /* Bottom border for rows */
+  text-align: left; /* Left align data text */
+}
+
+.buttons {
+  display: flex; /* Flexbox for buttons */
+  justify-content: space-around; /* Space out buttons evenly */
+  margin-top: 20px; /* Margin above buttons */
+}
+
+.update-btn,
+.reset-password-btn {
+  padding: 10px 20px; /* Padding for buttons */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor for buttons */
+  font-family: 'Poppins', sans-serif; /* Button font */
+  transition: background-color 0.3s; /* Transition effect */
+}
+
+.update-btn {
+  background-color: #FFB000; /* Update button color */
+  color: #fff; /* White text */
+}
+
+.update-btn:hover {
+  background-color: #FFCF9D; /* Lighten on hover */
+}
+
+.reset-password-btn {
+  background-color: #FF0000; /* Reset password button color */
+  color: #fff; /* White text */
+}
+
+.reset-password-btn:hover {
+  background-color: #FF7F7F; /* Lighten on hover */
+}

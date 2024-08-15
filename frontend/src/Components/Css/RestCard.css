@@ -1,0 +1,108 @@
+.RestCardSection {
+  padding: 20px;
+  background-color: #F5F5DC; /* Light background */
+}
+
+.RestCardHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.RestCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.RestCardHeader {
+  margin: 20px 30px;
+  text-align: center;
+  color: #FFB000;
+}
+
+.RestCardHeader h4 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.RestCardHeader h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+}
+
+.RestCardBody {
+  position: relative;
+  width: 250px; /* Adjust width as needed */
+  height: 350px; /* Adjust height as needed */
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #FFCF9D; /* Card background */
+}
+
+.RestCardBody:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.RestImgContainer {
+  display: flex;
+  overflow: hidden;
+  height: 200px; /* Adjust height as needed */
+}
+
+.RestImgContainer img {
+  width: auto;
+  height: 100%;
+  margin-right: 5px; /* Add space between images */
+  transition: transform 0.3s;
+}
+
+.RestCardBody:hover .RestImgContainer img {
+  transform: scale(1.05); /* Scale effect on hover */
+}
+
+.RestTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5); /* Dark background for contrast */
+  color: white; /* White text color for vi  sibility */
+  transition: background 0.3s;
+}
+
+.RestCardBody:hover .RestTitle {
+  background: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+}
+
+.RestName {
+  font-weight: bold;
+}
+
+.extraInfo {
+  display: none;
+  text-align: center;
+}
+
+.RestCardBody:hover .extraInfo {
+  display: block;
+}
+
+.viewMore {
+  display: inline-block;
+  margin-top: 5px;
+  text-decoration: none;
+  color: #FFB000; 
+  font-weight: bold;
+}
+
+.viewMore:hover {
+  color: rgb(248, 219, 188); 
+}

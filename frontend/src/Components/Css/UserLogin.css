@@ -1,0 +1,82 @@
+.loginbody {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #004225, #FFCF9D);
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.login-container {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.login-glass-card {
+  background: rgba(245, 245, 220, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 350px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #004225;
+}
+
+.glass-card h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #FFB000;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #004225;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 66, 37, 0.5);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  background: #FFB000;
+  color: #004225;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+  background: rgba(255, 176, 0, 0.8);
+}
+
+.signup-link {
+  text-align: center;
+  color: #FFCF9D; /* Match with the heading color */
+}
+
+.signup-link a {
+  color: #004225;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}

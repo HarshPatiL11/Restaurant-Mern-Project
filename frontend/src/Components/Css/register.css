@@ -1,0 +1,88 @@
+.registerbody { 
+ background: linear-gradient(135deg, #004225, #FFCF9D);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.register-glass-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 30px;
+  width: 400px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);    
+}
+
+h2 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.register-glass-card .input-group {
+  margin-bottom: 15px;
+}
+
+.label {
+  display: block;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  color: #333;
+  outline: none;
+}
+
+input:focus {
+  border: 2px solid #ffb000;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 10px;
+  background: #ffb000;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.register-btn:hover {
+  background: #ffcf9d;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.signup-link {
+  text-align: center;
+  color: #fff;
+  margin-top: 15px;
+}
+
+.success-message {
+  color: green; 
+  margin: 10px 0;
+}

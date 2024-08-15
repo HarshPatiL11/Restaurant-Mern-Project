@@ -197,7 +197,7 @@ export const getAllRestaurant = async (req, res) => {
 // get restaurant by Id
 export const getRestaurantById = async (req, res) => {
   try {
-    const restId = req.params.id; // Change this line to extract ID correctly
+    const restId = req.params._id; // Change this line to extract ID correctly
       if (!restId) {
         return res.status(404).send({
           success: false,

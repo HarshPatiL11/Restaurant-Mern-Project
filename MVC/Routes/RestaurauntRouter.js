@@ -12,7 +12,7 @@ const restRouter = express.Router();
 
 restRouter.post("/Add", authMiddle, formidable(), createRestaurant);
 restRouter.get("/get/All", formidable(), getAllRestaurant);
-restRouter.get("/get/:id", formidable(), getRestaurantById);
+restRouter.get("/get/:_id", getRestaurantById);
 restRouter.delete('/delete/:id',authMiddle,deleteRestaurant);
 
 export default restRouter;

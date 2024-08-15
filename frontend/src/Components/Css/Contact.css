@@ -1,0 +1,75 @@
+.contContainer {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #004225, #FFCF9D);
+  height: 80vh; /* Full height of the viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.contHeader {
+  margin-bottom: 20px;
+}
+
+.contHeader h6 {
+  color: #FFB000;
+  font-size: 24px;
+  text-align: center;
+}
+
+.cont-glass-card {
+  background: rgba(245, 245, 220, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 350px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #004225;
+}
+
+.cont-glass-card .input-group {
+  margin-bottom: 1.5rem;
+}
+
+.cont-glass-card .input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #004225;
+}
+
+.cont-glass-card .input-group input,
+.cont-glass-card .input-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 66, 37, 0.5);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.cont-glass-card .send-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  background: #FFB000;
+  color: #004225;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cont-glass-card .send-btn:hover {
+  background: rgba(255, 176, 0, 0.8);
+}
+
+.cont-glass-card .contError {
+  color: red;
+  margin-bottom: 20px;
+}
+
+.cont-glass-card .contSuccess {
+  color: green;
+  margin-bottom: 20px;
+}

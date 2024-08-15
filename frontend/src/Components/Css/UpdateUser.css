@@ -1,0 +1,74 @@
+.updateUserContainer {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #004225, #FFCF9D);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.updateUserForm {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 550px;
+  padding: 2rem;
+  background: rgba(245, 245, 220, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #004225;
+}
+
+
+.updateUserForm .input-group {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.updateUserForm .input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #004225;
+}
+
+.updateUserForm .input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 66, 37, 0.5);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.updateUserForm .send-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  background: #FFB000;
+  color: #004225;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.updateUserForm .send-btn:hover {
+  background: rgba(255, 176, 0, 0.8);
+}
+
+.updateUserForm .contError, .contSuccess {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.contError {
+  color: red;
+}
+
+.contSuccess {
+  color: green;
+}

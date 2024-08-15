@@ -3,6 +3,7 @@ import Layout from "../Layouts/Layout";
 import { Box, Typography, Button } from "@mui/material";
 import '../Css/Home.css'
 import CategoryCard from "./CategoryCard";
+import RestCards from "./RestrauntAll";
 
 const Home = () => {
   return (
@@ -39,6 +40,7 @@ const Home = () => {
           </Button>
         </Box>
       </div>
+      <RestCards/>
       <CategoryCard />
     </Layout>
   );

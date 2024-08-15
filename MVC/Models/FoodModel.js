@@ -15,7 +15,7 @@ const foodSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Food price is required"],
     },
-    foodImage: [
+    foodImage: 
       {
         data: {
           type: Buffer,
@@ -26,7 +26,6 @@ const foodSchema = new mongoose.Schema(
           required: false,
         },
       },
-    ],
     foodTags: {
       type: String,
     },

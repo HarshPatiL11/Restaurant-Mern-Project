@@ -1,7 +1,7 @@
 import Foods from "../Models/FoodModel.js"; // Adjust the path as needed
 import fs from "fs";
 
-// Add food
+// add
 export const addFood = async (req, res) => {
   try {
     const {
@@ -17,6 +17,7 @@ export const addFood = async (req, res) => {
       foodRatingCount,
     } = req.fields;
 
+    // Validate required fields
     if (!foodTitle || !foodDescription || !foodPrice) {
       return res.status(400).send({
         success: false,
@@ -26,30 +27,33 @@ export const addFood = async (req, res) => {
     if (!Restaurant) {
       return res.status(400).send({
         success: false,
-        message: "Restaurant id  is required.",
+        message: "Restaurant ID is required.",
       });
     }
 
-    let foodImages = [];
-    let i = 0;
-    while (req.files[`foodImage[${i}]`]) {
-      const image = req.files[`foodImage[${i}]`];
+    // Handle food image
+    let foodImageData = null;
+    if (req.files?.foodImages) {
+      const foodImage = req.files.foodImages;
 
-      if (image.size > 1000000) {
-        return res.status(400).send({
-          error: "Each image should be less than 1 MB",
-        });
+      if (foodImage.size > 1000000) {
+        return res
+          .status(400)
+          .send({ error: "Image should be less than 1 MB" });
       }
 
-      const imageData = {
-        data: fs.readFileSync(image.path),
-        contentType: image.type,
+      foodImageData = {
+        data: fs.readFileSync(foodImage.path),
+        contentType: foodImage.type,
       };
-
-      foodImages.push(imageData); // Push each image to the array
-      i++;
+    } else {
+      return res.status(400).send({
+        success: false,
+        message: "Food image is required.",
+      });
     }
 
+    // Create a new food instance
     const newFood = new Foods({
       foodTitle,
       foodDescription,
@@ -58,7 +62,7 @@ export const addFood = async (req, res) => {
       foodCategory,
       foodCode,
       foodIsAvailable,
-      foodImage: foodImages,
+      foodImage: foodImageData, // Use the foodImageData variable
       Restaurant,
       foodRating,
       foodRatingCount,
@@ -79,7 +83,7 @@ export const addFood = async (req, res) => {
   }
 };
 
-// Get all foods
+// get ALL
 export const getAllFoods = async (req, res) => {
   try {
     const foods = await Foods.find({});
@@ -93,12 +97,12 @@ export const getAllFoods = async (req, res) => {
     // Convert image data to base64
     const foodsWithImage = foods.map((food) => ({
       ...food._doc,
-      foodImage: food.foodImage.map((image) => ({
-        data: `data:${image.contentType};base64,${image.data.toString(
-          "base64"
-        )}`,
-        contentType: image.contentType,
-      })),
+      foodImage: {
+        data: `data:${
+          food.foodImage.contentType
+        };base64,${food.foodImage.data.toString("base64")}`,
+        contentType: food.foodImage.contentType,
+      },
     }));
 
     res.status(200).json({
@@ -122,7 +126,7 @@ export const getFoodById = async (req, res) => {
     if (!foodId) {
       return res
         .status(404)
-        .send({ success: false, message: "Food id not in DataBase." });
+        .send({ success: false, message: "Food id not in Database." });
     }
     const food = await Foods.findById(foodId);
 
@@ -135,12 +139,12 @@ export const getFoodById = async (req, res) => {
     // Convert image data to base64
     const foodWithImage = {
       ...food._doc,
-      foodImage: food.foodImage.map((image) => ({
-        data: `data:${image.contentType};base64,${image.data.toString(
-          "base64"
-        )}`,
-        contentType: image.contentType,
-      })),
+      foodImage: {
+        data: `data:${
+          food.foodImage.contentType
+        };base64,${food.foodImage.data.toString("base64")}`,
+        contentType: food.foodImage.contentType,
+      },
     };
 
     res.status(200).json({ success: true, food: foodWithImage });
@@ -154,17 +158,18 @@ export const getFoodById = async (req, res) => {
 };
 
 
+// Get food by Restaurant ID
 export const getFoodByRestId = async (req, res) => {
   try {
     const RestId = req.params.id;
     if (!RestId) {
       return res
         .status(404)
-        .send({ success: false, message: "Food id not in DataBase." });
+        .send({ success: false, message: "Restaurant id not provided." });
     }
     const food = await Foods.find({ Restaurant: RestId });
 
-    if (food.length === 0) {
+    if (!food.length) {
       return res
         .status(404)
         .send({ success: false, message: "Food items not found." });
@@ -173,23 +178,22 @@ export const getFoodByRestId = async (req, res) => {
     // Convert image data to base64
     const foodWithImage = food.map((item) => ({
       ...item._doc,
-      foodImage: item.foodImage.map((image) => ({
-        data: `data:${image.contentType};base64,${image.data.toString(
-          "base64"
-        )}`,
-        contentType: image.contentType,
-      })),
+      foodImage: {
+        data: `data:${item.foodImage.contentType};base64,${item.foodImage.data.toString("base64")}`,
+        contentType: item.foodImage.contentType,
+      },
     }));
 
     res.status(200).json({ success: true, food: foodWithImage });
   } catch (error) {
     res.status(500).send({
       success: false,
-      message: "API Error, error in get Food by ID API",
+      message: "API Error, error in get Food by Restaurant ID API",
       error: error.message,
     });
   }
 };
+
 
 
 // Update food

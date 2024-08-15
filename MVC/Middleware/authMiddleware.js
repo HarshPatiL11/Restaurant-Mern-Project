@@ -15,6 +15,7 @@ export const authMiddle = async (req, res, next) => {
       } else {
         console.log("Decoded JWT:", decode);
         req.userId = decode.id;
+        req.userType = decode.userType;
         next();
       }
     });

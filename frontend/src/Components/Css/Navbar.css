@@ -4,13 +4,13 @@
 
 .nav-menu{
     display: flex;
-
+    margin: 0px;
     list-style: none;
     align-items: center;
     justify-items: center;
 }
 .nav-menu li{
-    margin: 0px 20px;
+    margin: 0px 10px;
 }
 .nav-menu li a{
 text-decoration: none;

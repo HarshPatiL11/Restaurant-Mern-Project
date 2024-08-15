@@ -1,9 +1,12 @@
 .CatCardSection {
+  
+  padding: 20px 0;
+  background-color: #F5F5DC; 
+}
+.CatCardDiv{
   width: 85vw;
   margin: auto;
-  padding: 20px 0;
 }
-
 .CatHeader {
   margin: 20px 30px;
   text-align: center;
@@ -30,17 +33,21 @@
 }
 
 .CardBody {
-     width: 220px;
+  width: 220px;
   height: 200px;
   position: relative;
   overflow: hidden;
   border-radius: 8px;
   cursor: pointer;
   transition: transform 0.3s;
+  background-color: #FFCF9D; 
+
 }
 
 .CardBody:hover {
   transform: scale(1.05);
+  border: 2px solid #FFB000 ;
+  box-shadow: 2px 1px 2px 1px #8b5f01;
 }
 
 .catImg img {
@@ -52,25 +59,37 @@
 
 .catOverlay {
   position: absolute;
-  top: 0;
+  bottom: 0; 
   left: 0;
   width: 100%;
-  height: 100%;
+  height: auto; 
   background: rgba(0, 0, 0, 0.5);
   display: flex;
+  flex-direction: column; /* Stack title and link vertically */
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.CardBody:hover .catOverlay {
-  opacity: 1;
+  opacity: 1; /* Always visible */
+  transition: background 0.3s; /* Transition effect for background */
 }
 
 .catTitle {
-  color: white;
+  color: #f5f5dc;
   text-align: center;
   font-size: 1.8rem;
   font-weight: 600;
+}
+
+.viewLink {
+  display: none;
+  margin-top: 5px; 
+  text-decoration: none;
+  color: #f5f5dc; 
+  font-weight: 400; 
+  font-size: 1.2rem; 
+  transition: color 0.3s;
+}
+
+.CardBody:hover .viewLink {
+  display: inline-block;
+  color: #FFB000; 
 }

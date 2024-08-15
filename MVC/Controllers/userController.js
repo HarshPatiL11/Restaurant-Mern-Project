@@ -3,7 +3,7 @@ import UserModel from "../Models/UserModel.js";
 
 // get
 
-export const getAllUser = async (req, res) => {
+export const getUserByToken = async (req, res) => {
   try {
     // const allUsers = await UserModel.find();
     // res.status(200).json(allUsers);

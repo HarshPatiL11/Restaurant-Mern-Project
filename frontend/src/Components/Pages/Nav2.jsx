@@ -48,7 +48,20 @@ const Navbar = () => {
     }
 
     dispatch(logout());
-    navigate("/login"); 
+    navigate("/login");
+  };
+
+  const navigateToProfile = () => {
+    const userType = localStorage.getItem("userType");
+    if (userType === "admin") {
+      navigate("/profile/admin");
+    } else if (userType === "restaurantOwner") {
+      navigate("/profile/owner");
+    } else if (userType === "customer") {
+      navigate("/profile/customer");
+    } else {
+      navigate("/user"); // Default profile page
+    }
   };
 
   const drawer = (
@@ -85,15 +98,18 @@ const Navbar = () => {
           <Link to={"/"}>Home</Link>
         </li>
         <li>
-          <Link to={"/menu"}>Menu</Link>
+          <Link to={"/about"}>About</Link>
         </li>
         <li>
           <Link to={"/contact"}>Contact</Link>
         </li>
         <li>
-          <Link to={isLoggedIn ? "/user" : "/login"}>
-            <FaUser style={{ marginRight: "5px" }} />{" "}
-            {isLoggedIn ? "User" : "Login"}
+          <Link
+            to={isLoggedIn ? "#" : "/login"}
+            onClick={isLoggedIn ? navigateToProfile : null}
+          >
+            <FaUser style={{ marginRight: "5px" }} />
+            {isLoggedIn ? "Profile" : "Login"}
           </Link>
         </li>
         {isLoggedIn && (
@@ -159,15 +175,18 @@ const Navbar = () => {
                 <Link to={"/"}>Home</Link>
               </li>
               <li>
-                <Link to={"/menu"}>Menu</Link>
+                <Link to={"/about"}>About</Link>
               </li>
               <li>
                 <Link to={"/contact"}>Contact</Link>
               </li>
               <li>
-                <Link to={isLoggedIn ? "/user" : "/login"}>
-                  <FaUser style={{ marginRight: "5px" }} />{" "}
-                  {isLoggedIn ? "User" : "Login"}
+                <Link
+                  to={isLoggedIn ? "#" : "/login"}
+                  onClick={isLoggedIn ? navigateToProfile : null}
+                >
+                  <FaUser style={{ marginRight: "5px" }} />
+                  {isLoggedIn ? "Profile" : "Login"}
                 </Link>
               </li>
               {isLoggedIn && (
