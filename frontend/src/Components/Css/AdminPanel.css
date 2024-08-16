@@ -1,0 +1,61 @@
+.adminPanelContainer {
+  padding: 20px;
+}
+
+.adminPanelContent {
+    border: 1px solid ;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+.adminPanelContainer h4 {
+  color: #FFB000;
+
+  margin-bottom: 20px;
+}
+
+.adminPanelContent .panelDiv {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.RestCntrl, .UserCntrl {
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.CtrHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0px 15px;
+  padding: 5px 7px;
+}
+
+.CtrHeader h6 {
+  color: #FFB000;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+}
+
+.CtrHeader label {
+  color: #004225;
+  font-weight: 400;
+}
+
+.hiddenContent {
+  display: none;
+}
+
+.visible {
+  display: block;
+}

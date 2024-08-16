@@ -55,7 +55,7 @@ const UserProfile = () => {
     switch (user.userType) {
       case "admin":
         return <AdminPanel />;
-      case "vendor":
+      case "vender":
         return <VendorPanel />;
       case "client":
         return <ClientPanel />;

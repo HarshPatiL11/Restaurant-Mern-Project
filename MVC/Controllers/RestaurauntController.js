@@ -12,7 +12,7 @@ export const createRestaurant = async (req, res) => {
       restRating,
       ratingCount,
       restCode,
-      restCoords = {}, // Add default value to avoid destructuring undefined
+      restCoords = {},
     } = req.fields;
     const {
       id,
@@ -172,7 +172,6 @@ export const getAllRestaurant = async (req, res) => {
           : null,
         contentType: img.contentType,
       }));
-
       return {
         ...restaurant._doc,
         restImage: images,

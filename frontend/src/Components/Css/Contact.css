@@ -14,8 +14,9 @@
 
 .contHeader h6 {
   color: #FFB000;
-  font-size: 24px;
-  text-align: center;
+ font-size: 2.4rem;
+    font-weight: 500;
+    margin-bottom: 10px;
 }
 
 .cont-glass-card {
